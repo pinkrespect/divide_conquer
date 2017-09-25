@@ -1,6 +1,9 @@
 import java.io.*;
 import java.util.Scanner;
 
+class Point {
+    int x, y;
+}
 public class CP {
     static void insert(int array1[][], int array2[][], int first, int second){
         array1[0][first] = array2[0][second];
@@ -73,19 +76,24 @@ public class CP {
     }
 
     static int[][] closestPair(int x_coordi[][], int y_coordi[][]){
+        int min;
         if(x_coordi[0].length <= 3){
-            int min = Integer.MAX_VALUE, distance;
+            min = Integer.MAX_VALUE;
+            int [][] min_pt = new int [2][2];
+            int distance;
             for(int i = 0; i < x_coordi[0].length; i++){
                 for(int j = 0; j < x_coordi[0].length; j++){
                     if(j != i) {
                         distance = calc_distance(x_coordi[i], x_coordi[j]);
                         if (min >= distance) {
                             min = distance;
+                            min_pt[0] = x_coordi[i];
+                            min_pt[1] = x_coordi[j];
                         }
                     }
                 }
             }
-            return null;
+            return min_pt;
         }
         int length = x_coordi[0].length;
         int x_left[][] = new int[2][length/2];
@@ -127,17 +135,16 @@ public class CP {
         }
 
         int s[][] = new int[2][s_length];
-        for(int i = 0; i < s_length; i++){
-            insert(s, x_coordi, i, s_index[i]);
-        }
+        for(int i = 0; i < s_length; i++) insert(s, x_coordi, i, s_index[i]);
+
 
         sort(s, 1, 0, s_length - 1);
 
         for(int i = 0; i < s_length; i++){
-            
-        }
-        //return [0][];
 
+        }
+
+        return null;
 
     }
 
@@ -176,7 +183,5 @@ public class CP {
         } catch(Exception e) {
             e.printStackTrace();
         }
-        // let Px be the sorted list.
-        // let Py be the list of the points sorted by their y-coords.
     }
 }
